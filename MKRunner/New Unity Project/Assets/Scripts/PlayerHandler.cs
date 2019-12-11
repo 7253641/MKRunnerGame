@@ -9,10 +9,20 @@ public class PlayerHandler : MonoBehaviour
     bool grounded = true;
     public float fallMultiplier = 2;
     public float moveSpeed = 2;
+    float horizontalMovement;
+    [HideInInspector]
+    public int PlayerScore;
     // Start is called before the first frame update
     void Start()
     {
+        PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        horizontalMovement = Input.GetAxis("Horizontal");
+        JumpControl();
     }
 
     // Update is called once per frame
@@ -20,9 +30,8 @@ public class PlayerHandler : MonoBehaviour
     {
         if ((int)rb2d.velocity.y < 0)
         {
-            rb2d.velocity += Vector2.up * fallMultiplier * Physics2D.gravity.y * Time.deltaTime;
+            rb2d.velocity += Vector2.up * fallMultiplier * Physics2D.gravity.y * Time.fixedDeltaTime;
         }
-        JumpControl();
         MovementControl();
     }
 
@@ -30,14 +39,13 @@ public class PlayerHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && grounded == true)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce * Time.fixedDeltaTime);
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
     void MovementControl()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        rb2d.velocity = new Vector2(horizontal * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(horizontalMovement * moveSpeed * Time.deltaTime, rb2d.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
