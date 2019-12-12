@@ -12,6 +12,7 @@ public class PlayerHandler : MonoBehaviour
     float horizontalMovement;
     [HideInInspector]
     public int PlayerScore;
+    float MeterTravelled;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,10 @@ public class PlayerHandler : MonoBehaviour
 
     private void Update()
     {
+        MeterTravelled += Time.deltaTime * moveSpeed;
         horizontalMovement = Input.GetAxis("Horizontal");
         JumpControl();
+        GameHandler.instance.SetMeter((int)MeterTravelled);
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class PlayerHandler : MonoBehaviour
 
     void JumpControl()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && grounded == true)
+        if (Input.GetButtonDown("Jump") && grounded == true)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -57,7 +60,13 @@ public class PlayerHandler : MonoBehaviour
 
         if (collision.gameObject.GetComponent<ObstacleHandler>() != null)
         {
-            SceneHandler.instance.ReloadCurrentScene();
+            GameHandler.instance.ShowGameOverState();
+            GameHandler.instance.finalMeter = (int)MeterTravelled;
+            GameHandler.instance.finalScore = PlayerScore;
+            GameHandler.instance.SetFinalMeter((int)MeterTravelled);
+            GameHandler.instance.SetFinalScore(PlayerScore);
+            GameHandler.instance.isGameOver = true;
+            Destroy(gameObject);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

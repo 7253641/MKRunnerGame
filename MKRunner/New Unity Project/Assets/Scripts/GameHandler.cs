@@ -1,17 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
+    public static GameHandler instance;
     public GameObject ObstacleToSpawn;
     public GameObject rewardToSpawn;
+    public GameObject scoreText;
+    public GameObject meterText;
+    public GameObject gameOverUI;
     public Vector3 rewardPosition;
     public Vector3 ObstaclePosition;
+    [HideInInspector]public int finalScore = 0;
+    [HideInInspector]public int finalMeter = 0;
+    public GameObject finalScoreText;
+    public GameObject finalMeterText;
     float randX;
+    [HideInInspector] public bool isGameOver = false;
     // Start is called before the first frame update
     void Start()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        isGameOver = false;
+        gameOverUI.SetActive(false);
         StartCoroutine(SpawnObstacle());
         StartCoroutine(SpawnReward());
     }
@@ -22,9 +38,34 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    public void SetScore(int score)
+    {
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString();
+    }
+
+    public void SetMeter(int meter)
+    {
+        meterText.GetComponent<TextMeshProUGUI>().text = meter.ToString() + "m";
+    }
+
+    public void ShowGameOverState()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    public void SetFinalScore(int score)
+    {
+        finalScoreText.GetComponent<TextMeshProUGUI>().text = "Final Score: " + score;
+    }
+
+    public void SetFinalMeter(int meter)
+    {
+        finalMeterText.GetComponent<TextMeshProUGUI>().text = "Meters Travelled: " + meter + "m";
+    }
+
     IEnumerator SpawnObstacle()
     {
-        while (true)
+        while (isGameOver == false)
         {
             randX = Random.Range(0, 5);
             Instantiate(ObstacleToSpawn, new Vector3(
@@ -37,7 +78,7 @@ public class GameHandler : MonoBehaviour
 
     IEnumerator SpawnReward()
     {
-        while (true)
+        while (isGameOver == false)
         {
             int randRewardX = Random.Range(0, 4);
             Instantiate(rewardToSpawn, new Vector3(

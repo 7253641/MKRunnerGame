@@ -23,6 +23,7 @@ public class RewardHandler : MonoBehaviour
             print("collected");
             PlayerHandler player = collision.gameObject.GetComponent<PlayerHandler>();
             player.PlayerScore += 1;
+            GameHandler.instance.SetScore(player.PlayerScore);
             Destroy(gameObject);
         }
     }
