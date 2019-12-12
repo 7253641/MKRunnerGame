@@ -24,6 +24,7 @@ public class RewardHandler : MonoBehaviour
             PlayerHandler player = collision.gameObject.GetComponent<PlayerHandler>();
             player.PlayerScore += 1;
             GameHandler.instance.SetScore(player.PlayerScore);
+            FindObjectOfType<CameraControl>().CamShake();
             Destroy(gameObject);
         }
     }

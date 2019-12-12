@@ -58,7 +58,8 @@ public class PlayerHandler : MonoBehaviour
             grounded = true;
         }
 
-        if (collision.gameObject.GetComponent<ObstacleHandler>() != null)
+        if (collision.gameObject.GetComponent<ObstacleHandler>() != null || 
+            collision.gameObject.tag == "Finish")
         {
             GameHandler.instance.ShowGameOverState();
             GameHandler.instance.finalMeter = (int)MeterTravelled;

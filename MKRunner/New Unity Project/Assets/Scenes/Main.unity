@@ -577,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &87511694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -796,8 +796,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252952730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 3.5, z: 0}
-  m_LocalScale: {x: 10, y: 5, z: 1}
+  m_LocalPosition: {x: 20, y: 2.5, z: 0}
+  m_LocalScale: {x: 10, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 1623877725}
   m_RootOrder: 3
@@ -818,6 +818,7 @@ MonoBehaviour:
   startX: 85
   endX: -42.5
   FinishSnap: 0
+  makeRandomGap: 0
 --- !u!212 &252952733
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1190,6 +1191,7 @@ GameObject:
   - component: {fileID: 641273168}
   - component: {fileID: 641273166}
   - component: {fileID: 641273167}
+  - component: {fileID: 641273169}
   m_Layer: 0
   m_Name: GroundArt
   m_TagString: Untagged
@@ -1258,10 +1260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c4cd95efe7d81419bf8d95691f04fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 20
+  scrollSpeed: 15
   startX: 80
   endX: -42.5
   FinishSnap: 0
+  makeRandomGap: 1
 --- !u!4 &641273168
 Transform:
   m_ObjectHideFlags: 0
@@ -1276,6 +1279,32 @@ Transform:
   m_Father: {fileID: 1623877725}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &641273169
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641273165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.6644907}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.4, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.4, y: 0.6710187}
+  m_EdgeRadius: 0
 --- !u!1 &654851796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,7 +1355,7 @@ MonoBehaviour:
   scoreText: {fileID: 1521118766}
   meterText: {fileID: 3804909}
   gameOverUI: {fileID: 1949611451}
-  rewardPosition: {x: 16, y: -1.5, z: 0}
+  rewardPosition: {x: 16, y: -2, z: 0}
   ObstaclePosition: {x: 16, y: -2.5, z: 0}
   finalScore: 0
   finalMeter: 0
@@ -1615,8 +1644,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108137433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 84, y: 3.5, z: 0}
-  m_LocalScale: {x: 10, y: 5, z: 1}
+  m_LocalPosition: {x: 84, y: 2.5, z: 0}
+  m_LocalScale: {x: 10, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 1623877725}
   m_RootOrder: 4
@@ -1637,6 +1666,7 @@ MonoBehaviour:
   startX: 85
   endX: -42.5
   FinishSnap: 0
+  makeRandomGap: 0
 --- !u!212 &1108137436
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1686,6 +1716,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1184345358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184345360}
+  - component: {fileID: 1184345359}
+  m_Layer: 0
+  m_Name: DeathZone
+  m_TagString: Finish
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1184345359
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184345358}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 108.98285, y: -2.6383858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 443.93835, y: 6.2767715}
+  m_EdgeRadius: 0
+--- !u!4 &1184345360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184345358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -9.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1229024693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2325,6 +2412,7 @@ GameObject:
   - component: {fileID: 1695227446}
   - component: {fileID: 1695227447}
   - component: {fileID: 1695227448}
+  - component: {fileID: 1695227449}
   m_Layer: 0
   m_Name: GroundArt (1)
   m_TagString: Untagged
@@ -2407,10 +2495,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c4cd95efe7d81419bf8d95691f04fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 20
+  scrollSpeed: 15
   startX: 80
   endX: -42.5
   FinishSnap: 0
+  makeRandomGap: 1
+--- !u!61 &1695227449
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695227445}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.6286736}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.4, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.4, y: 0.742653}
+  m_EdgeRadius: 0
 --- !u!1 &1812119236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2538,7 @@ GameObject:
   - component: {fileID: 1812119238}
   - component: {fileID: 1812119237}
   - component: {fileID: 1812119240}
+  - component: {fileID: 1812119241}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2502,14 +2618,33 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812119236}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 441a4cf9d8daee441840aca8d92acb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectToFollow: {fileID: 1863736323}
   offset: {x: 7, y: 4}
-  Smoothness: 0
+  Smoothness: 0.5
+--- !u!95 &1812119241
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812119236}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 60ab4fdb28109ad428a1412f753bcc4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1863736323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,7 +2915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1949611452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2815,7 +2950,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099795671}
-  - component: {fileID: 2099795670}
   m_Layer: 0
   m_Name: CameraMover
   m_TagString: Untagged
@@ -2823,21 +2957,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2099795670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099795669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441a4cf9d8daee441840aca8d92acb5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToFollow: {fileID: 0}
-  offset: {x: 8, y: 4}
-  Smoothness: 1
 --- !u!4 &2099795671
 Transform:
   m_ObjectHideFlags: 0
