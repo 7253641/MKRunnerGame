@@ -13,9 +13,12 @@ public class PlayerHandler : MonoBehaviour
     [HideInInspector]
     public int PlayerScore;
     float MeterTravelled;
+    SoundFXManager sound;
+    public GameObject DeathFX;
     // Start is called before the first frame update
     void Start()
     {
+        sound = FindObjectOfType<SoundFXManager>();
         PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
         FindObjectOfType<SoundFXManager>().Play("Bike");
@@ -68,7 +71,10 @@ public class PlayerHandler : MonoBehaviour
             GameHandler.instance.SetFinalMeter((int)MeterTravelled);
             GameHandler.instance.SetFinalScore(PlayerScore);
             GameHandler.instance.isGameOver = true;
-            FindObjectOfType<SoundFXManager>().Stop("Bike");
+            sound.Stop("Bike");
+            sound.Play("PlayerDead");
+            sound.Play("PlayerDead2");
+            Instantiate(DeathFX, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
