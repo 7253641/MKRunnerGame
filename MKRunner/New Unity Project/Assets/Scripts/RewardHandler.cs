@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RewardHandler : MonoBehaviour
 {
+    public GameObject destoryFX;
+    public GameObject points;
+    public Vector3 pointsOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,9 @@ public class RewardHandler : MonoBehaviour
             player.PlayerScore += 1;
             GameHandler.instance.SetScore(player.PlayerScore);
             FindObjectOfType<CameraControl>().CamShake();
+            Instantiate(points, transform.position + pointsOffset, Quaternion.identity);
+            Instantiate(destoryFX, transform.position, Quaternion.Euler(0, 0, Random.Range(0f,360f)));
+            FindObjectOfType<SoundFXManager>().Play("Explode");
             Destroy(gameObject);
         }
     }

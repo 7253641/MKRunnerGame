@@ -8,7 +8,7 @@ public class PlayerHandler : MonoBehaviour
     public float jumpForce;
     bool grounded = true;
     public float fallMultiplier = 2;
-    public float moveSpeed = 2;
+    public float moveSpeed = 1.5f;
     float horizontalMovement;
     [HideInInspector]
     public int PlayerScore;
@@ -18,6 +18,7 @@ public class PlayerHandler : MonoBehaviour
     {
         PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
+        FindObjectOfType<SoundFXManager>().Play("Bike");
     }
 
     private void Update()
@@ -67,6 +68,7 @@ public class PlayerHandler : MonoBehaviour
             GameHandler.instance.SetFinalMeter((int)MeterTravelled);
             GameHandler.instance.SetFinalScore(PlayerScore);
             GameHandler.instance.isGameOver = true;
+            FindObjectOfType<SoundFXManager>().Stop("Bike");
             Destroy(gameObject);
         }
     }

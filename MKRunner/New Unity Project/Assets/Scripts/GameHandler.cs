@@ -67,7 +67,7 @@ public class GameHandler : MonoBehaviour
     {
         while (isGameOver == false)
         {
-            randX = Random.Range(0, 5);
+            randX = Random.Range(0f, 5f);
             Instantiate(ObstacleToSpawn, new Vector3(
                 ObstaclePosition.x + randX, ObstaclePosition.y, ObstaclePosition.z),
                 Quaternion.identity);
@@ -80,7 +80,7 @@ public class GameHandler : MonoBehaviour
     {
         while (isGameOver == false)
         {
-            int randRewardX = Random.Range(0, 4);
+            float randRewardX = Random.Range(0f, 4f);
             Instantiate(rewardToSpawn, new Vector3(
                 rewardPosition.x + randRewardX, rewardPosition.y + randRewardX, rewardPosition.z),
                 Quaternion.identity);

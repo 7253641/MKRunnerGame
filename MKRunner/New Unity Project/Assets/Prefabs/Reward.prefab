@@ -134,3 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680fb5be947108f419a8232ec1e5c435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destoryFX: {fileID: 1027625670255522796, guid: ff745aad2a20e2744875d4c1d0fc66ec,
+    type: 3}
+  points: {fileID: 2097169054265958130, guid: d5830f6ad28dbcf4fbf8ad6fb8a59d98, type: 3}
+  pointsOffset: {x: 1, y: 1, z: 0}

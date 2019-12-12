@@ -41,21 +41,21 @@ public class RepeatingBG : MonoBehaviour
     {
         if (transform.localPosition.x <= endX)
         {
-            Vector2 pos = new Vector2(startX + randomGap, transform.position.y + randVerticalOffset);
-            transform.localPosition = pos;
             if (makeRandomGap == true)
             {
-                randomGap = Random.Range(5f, 15f);
-                randVerticalOffset = Random.Range(-1f, 1f);
+                randomGap = Random.Range(10f, 15f);
+                randVerticalOffset = Random.Range(-.5f, 1f);
                 if(randVerticalOffset != 0)
                 {
-                    randomGap = 10f;
+                    randomGap = 15f;
                 }
             }
             else
             {
                 randomGap = 0;
             }
+            Vector2 pos = new Vector2(startX + randomGap, transform.position.y + randVerticalOffset);
+            transform.localPosition = pos;
         }
     }
 
