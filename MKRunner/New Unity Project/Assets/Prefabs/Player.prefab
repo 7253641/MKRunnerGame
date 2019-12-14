@@ -99,8 +99,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 30
   fallMultiplier: 5
-  moveSpeed: 100
+  moveSpeed: 200
   PlayerScore: 0
+  DeathFX: {fileID: 6195156402588451990, guid: 65bffbf13e763744a81eceba9db044a1, type: 3}
+  leftBound: -9
+  rightBound: 10
+  joystick: {fileID: 0}
+  isOnMobileControl: 1
 --- !u!50 &2764105649775738053
 Rigidbody2D:
   serializedVersion: 4

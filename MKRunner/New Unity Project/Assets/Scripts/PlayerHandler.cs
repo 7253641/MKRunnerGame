@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class PlayerHandler : MonoBehaviour
 {
-    Rigidbody2D rb2d;
     public float jumpForce;
-    bool grounded = true;
     public float fallMultiplier = 2;
     public float moveSpeed = 1.5f;
-    float horizontalMovement;
     [HideInInspector]
     public int PlayerScore;
-    float MeterTravelled;
-    SoundFXManager sound;
     public GameObject DeathFX;
-    Animator animator;
     public int leftBound;
     public int rightBound;
+    public Joystick joystick;
+    public bool isOnMobileControl;
+
+    float horizontalMovement;
+    float MeterTravelled;
+    SoundFXManager sound;
+    Animator animator;
+    bool grounded = true;
+    Rigidbody2D rb2d;
+    int jumpCount = 2;
+    Touch touchInfo;
     // Start is called before the first frame update
     void Start()
     {
+        
         sound = FindObjectOfType<SoundFXManager>();
         PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
         FindObjectOfType<SoundFXManager>().Play("Bike");
         animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -48,10 +55,9 @@ public class PlayerHandler : MonoBehaviour
 
     void JumpControl()
     {
-        if (Input.GetButtonDown("Jump") && grounded == true)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetTrigger("Jump");
+            Jump();
         }
     }
 
@@ -59,7 +65,14 @@ public class PlayerHandler : MonoBehaviour
     {
         if (transform.position.x < rightBound && transform.position.x > leftBound)
         {
-            rb2d.velocity = new Vector2(horizontalMovement * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+            if (isOnMobileControl == false)
+            {
+                rb2d.velocity = new Vector2(horizontalMovement * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+            }
+            else
+            {
+                rb2d.velocity = new Vector2(joystick.Horizontal * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+            }
         }
     }
 
@@ -91,6 +104,15 @@ public class PlayerHandler : MonoBehaviour
         if (collision.gameObject.GetComponent<GroundHandler>() != null)
         {
             grounded = false;
+        }
+    }
+
+    public void Jump()
+    {
+        if (grounded == true)
+        {
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetTrigger("Jump");
         }
     }
 }
