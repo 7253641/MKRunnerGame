@@ -15,6 +15,9 @@ public class PlayerHandler : MonoBehaviour
     float MeterTravelled;
     SoundFXManager sound;
     public GameObject DeathFX;
+    Animator animator;
+    public int leftBound;
+    public int rightBound;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class PlayerHandler : MonoBehaviour
         PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
         FindObjectOfType<SoundFXManager>().Play("Bike");
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -47,12 +51,16 @@ public class PlayerHandler : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded == true)
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetTrigger("Jump");
         }
     }
 
     void MovementControl()
     {
-        rb2d.velocity = new Vector2(horizontalMovement * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+        if (transform.position.x < rightBound && transform.position.x > leftBound)
+        {
+            rb2d.velocity = new Vector2(horizontalMovement * moveSpeed * Time.deltaTime, rb2d.velocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,7 +70,7 @@ public class PlayerHandler : MonoBehaviour
             grounded = true;
         }
 
-        if (collision.gameObject.GetComponent<ObstacleHandler>() != null || 
+        if (collision.gameObject.GetComponent<ObstacleHandler>() != null ||
             collision.gameObject.tag == "Finish")
         {
             GameHandler.instance.ShowGameOverState();
