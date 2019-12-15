@@ -14,6 +14,8 @@ public class PlayerHandler : MonoBehaviour
     public int rightBound;
     public Joystick joystick;
     public bool isOnMobileControl;
+    [HideInInspector]
+    public int currentHighestScore;
 
     float horizontalMovement;
     float MeterTravelled;
@@ -23,16 +25,25 @@ public class PlayerHandler : MonoBehaviour
     Rigidbody2D rb2d;
     int jumpCount = 2;
     Touch touchInfo;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (SaveAndLoad.LoadPlayer() != null)
+        {
+            currentHighestScore = SaveAndLoad.LoadPlayer().currentHightestScore;
+        }
+        else
+        {
+            currentHighestScore = 0;
+        }
         sound = FindObjectOfType<SoundFXManager>();
         PlayerScore = 0;
         rb2d = GetComponent<Rigidbody2D>();
         FindObjectOfType<SoundFXManager>().Play("Bike");
         animator = GetComponent<Animator>();
-
+        print(currentHighestScore);
+        GameHandler.instance.UpdateHighestScoreText(currentHighestScore);
     }
 
     private void Update()
@@ -92,13 +103,23 @@ public class PlayerHandler : MonoBehaviour
             GameHandler.instance.SetFinalMeter((int)MeterTravelled);
             GameHandler.instance.SetFinalScore(PlayerScore);
             GameHandler.instance.isGameOver = true;
+            
             sound.Stop("Bike");
             sound.Play("PlayerDead");
             sound.Play("PlayerDead2");
             Instantiate(DeathFX, transform.position, transform.rotation);
+            
+            if (PlayerScore > currentHighestScore)
+            {
+                currentHighestScore = PlayerScore;
+                SavePlayer();
+            }
             Destroy(gameObject);
+
         }
     }
+
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<GroundHandler>() != null)
@@ -114,5 +135,15 @@ public class PlayerHandler : MonoBehaviour
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("Jump");
         }
+    }
+
+    public void SavePlayer()
+    {
+        SaveAndLoad.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        currentHighestScore = SaveAndLoad.LoadPlayer().currentHightestScore;
     }
 }

@@ -11,6 +11,7 @@ public class GameHandler : MonoBehaviour
     public GameObject scoreText;
     public GameObject meterText;
     public GameObject gameOverUI;
+    public GameObject highestScoreText;
     public Vector3 rewardPosition;
     public Vector3 ObstaclePosition;
     [HideInInspector]public int finalScore = 0;
@@ -36,6 +37,11 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void UpdateHighestScoreText(int score)
+    {
+        highestScoreText.GetComponent<TextMeshProUGUI>().text = "Highest: " + score;
     }
 
     public void SetScore(int score)

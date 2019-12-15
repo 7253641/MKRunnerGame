@@ -26,6 +26,10 @@ public class RewardHandler : MonoBehaviour
             print("collected");
             PlayerHandler player = collision.gameObject.GetComponent<PlayerHandler>();
             player.PlayerScore += 1;
+            if(player.PlayerScore > player.currentHighestScore)
+            {
+                GameHandler.instance.UpdateHighestScoreText(player.PlayerScore);
+            }
             GameHandler.instance.SetScore(player.PlayerScore);
             FindObjectOfType<CameraControl>().CamShake();
             Instantiate(points, transform.position + pointsOffset, Quaternion.identity);
